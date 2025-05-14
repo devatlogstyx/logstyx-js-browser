@@ -1,0 +1,54 @@
+name: Build & Deploy to Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0  # Important for pushing tags
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Bump version and create Git tag
+        run: |
+          VERSION=$(npm version patch -m "chore: bump version to %s")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          git push origin main --follow-tags
+
+      - name: Build project
+        run: npm run build
+
+      - name: Push only necessary files to release branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp package.json /tmp/package.json
+          cp README.md /tmp/README.md || true
+
+          git checkout --orphan release
+          git reset --hard
+
+          mv /tmp/package.json .
+          mv /tmp/README.md . || true
+
+          rm -rf .github/ node_modules/ src/
+
+          git add .
+          git commit -m "Release build for ${{ env.VERSION }}"
+          git tag ${{ env.VERSION }} || true
+          git push -f origin release
