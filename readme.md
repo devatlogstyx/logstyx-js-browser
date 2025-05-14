@@ -28,7 +28,7 @@ You can configure the logging events and the data you want to collect by modifyi
 
 ```javascript
 window.LogstyxConfig = {
-  apiKey: "your-api-key",
+  projectId: "your_logstyx_project_id",
   captureUncaught: true,
   captureUnhandledRejections: true,
   tracker: {
