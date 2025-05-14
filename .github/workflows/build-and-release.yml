@@ -28,7 +28,7 @@ jobs:
         run: |
           VERSION=$(npm version patch -m "chore: bump version to %s")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          git push origin main --follow-tags
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} main --follow-tags
 
       - name: Build project
         run: npm run build
@@ -51,4 +51,4 @@ jobs:
           git add .
           git commit -m "Release build for ${{ env.VERSION }}"
           git tag ${{ env.VERSION }} || true
-          git push -f origin release
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} release --tags
