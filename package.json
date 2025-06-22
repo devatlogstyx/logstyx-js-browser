@@ -1,5 +1,5 @@
 {
-  "name": "logstyx-js-sdk",
+  "name": "logstyx-js-browser",
   "version": "1.0.0",
   "description": "logstyx sdk for javascript",
   "main": "./dist/logstyx-js-browser.js",

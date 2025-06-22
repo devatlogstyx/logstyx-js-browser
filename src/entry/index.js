@@ -1,5 +1,5 @@
 //@ts-check
-const { attachGlobalEventListeners, getDeviceParams } = require("../lib/browser");
+const { attachGlobalEventListeners, getDeviceParams, sendFn } = require("../lib/browser");
 const useLogstyx = require("logstyx-js-core")
 
 const defaultDevice = getDeviceParams()
@@ -9,6 +9,7 @@ if (typeof window !== "undefined") {
     if (window.LogstyxConfig && !window.Logstyx) {
         instance = useLogstyx({
             ...window.LogstyxConfig,
+            sendFunc: sendFn,
             device: window.LogstyxConfig.device || defaultDevice,
         });
         window.Logstyx = instance;

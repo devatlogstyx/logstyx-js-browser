@@ -19,6 +19,10 @@ exports.getBrowserFromUserAgent = (ua) => {
     return "Unknown";
 }
 
+exports.sendFn = (endpoint, { body, }) => {
+    return navigator.sendBeacon(endpoint, body);
+}
+
 exports.getDeviceParams = () => {
     return {
         "type": "browser",
