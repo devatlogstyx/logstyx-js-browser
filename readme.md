@@ -50,6 +50,14 @@ but you can also attach the element you want to monitor with data-logstyx* attri
 </button>
 ```
 
+## Reserved Fields
+
+These fields are automatically populated:
+
+- `context.url` - Current page URL
+- `context.event` - URL path
+- `context.referrer` - Previous page
+- `context.title` - Page title
 ## License
 
 This project is licensed under the ISC License. See the LICENSE file for details. 
