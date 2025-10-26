@@ -18,7 +18,7 @@ if (typeof window !== "undefined") {
             try {
                 if (typeof window !== "undefined") {
                     window.onerror = (msg, src, lineno, colno, err) => {
-                        instance.send("error", { message: msg, stack: err?.stack || null });
+                        instance.send("error", { error: msg, stack: err?.stack || null });
                     };
                 }
             } catch (e) {
@@ -31,7 +31,7 @@ if (typeof window !== "undefined") {
                 const handler = (reason) => {
                     const message = reason instanceof Error ? reason.message : String(reason);
                     const stack = reason instanceof Error ? reason.stack : undefined;
-                    instance.send("error", { message, stack });
+                    instance.send("error", { error: message, stack });
                 };
 
                 window.onunhandledrejection = (e) => handler(e.reason);
