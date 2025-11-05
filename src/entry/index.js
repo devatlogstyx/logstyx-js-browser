@@ -37,7 +37,7 @@ if (typeof window !== "undefined") {
                     const stack = reason instanceof Error ? reason.stack : undefined;
                     const title = reason instanceof Error ? reason.name : "Unhandled Rejection";
 
-                    instance.send("error", { title, error: message, stack });
+                    instance.send("error", { title, message, stack });
                 };
 
                 window.onunhandledrejection = (e) => handler(e.reason);
