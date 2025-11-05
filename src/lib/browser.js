@@ -64,7 +64,7 @@ exports.getBrowserContextExtras = (eventType) => {
         if (key === "event") ctx.event = eventType;
         else if (key === "url") ctx.url = location.href;
         else if (key === "referrer") ctx.referrer = document.referrer || null;
-        else if (key === "title") ctx.title = document.title || null;
+        else if (key === "pageTitle") ctx.title = document.title || null;
     });
     return ctx;
 };
