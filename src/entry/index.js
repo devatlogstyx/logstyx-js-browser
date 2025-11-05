@@ -18,11 +18,7 @@ if (typeof window !== "undefined") {
             try {
                 if (typeof window !== "undefined") {
                     window.onerror = (msg, src, lineno, colno, err) => {
-                        instance.send("error", {
-                            title: err?.name || "Unknown Error",
-                            message: msg || err?.message,
-                            stack: err?.stack || null
-                        });
+                        instance.error(err);
                     };
                 }
             } catch (e) {
@@ -37,7 +33,7 @@ if (typeof window !== "undefined") {
                     const stack = reason instanceof Error ? reason.stack : undefined;
                     const title = reason instanceof Error ? reason.name : "Unhandled Rejection";
 
-                    instance.send("error", { title, message, stack });
+                    instance.error({ title, message, stack });
                 };
 
                 window.onunhandledrejection = (e) => handler(e.reason);
