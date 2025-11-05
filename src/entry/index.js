@@ -18,7 +18,11 @@ if (typeof window !== "undefined") {
             try {
                 if (typeof window !== "undefined") {
                     window.onerror = (msg, src, lineno, colno, err) => {
-                        instance.error(err);
+                        instance.error({
+                            title: err?.name || "Unknown Error",
+                            message: msg || err?.message,
+                            stack: err?.stack || null
+                        });
                     };
                 }
             } catch (e) {
