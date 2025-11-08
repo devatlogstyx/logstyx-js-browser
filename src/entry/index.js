@@ -18,7 +18,7 @@ if (typeof window !== "undefined") {
             try {
                 if (typeof window !== "undefined") {
                     window.onerror = (msg, src, lineno, colno, err) => {
-                        instance.error({
+                        instance.critical({
                             title: err?.name || "Unknown Error",
                             message: msg || err?.message,
                             stack: err?.stack || null
@@ -37,7 +37,7 @@ if (typeof window !== "undefined") {
                     const stack = reason instanceof Error ? reason.stack : undefined;
                     const title = reason instanceof Error ? reason.name : "Unhandled Rejection";
 
-                    instance.error({ title, message, stack });
+                    instance.critical({ title, message, stack });
                 };
 
                 window.onunhandledrejection = (e) => handler(e.reason);
