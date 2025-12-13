@@ -20,7 +20,8 @@ exports.getBrowserFromUserAgent = (ua) => {
 }
 
 exports.sendFn = (endpoint, { body, }) => {
-    return navigator.sendBeacon(endpoint, body);
+    const blob = new Blob([body], { type: 'application/json' });
+    return navigator.sendBeacon(endpoint, blob);
 }
 
 exports.getDeviceParams = () => {
