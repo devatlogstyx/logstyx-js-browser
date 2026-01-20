@@ -1,4 +1,6 @@
 //@ts-check
+
+const { getOrSetSessionId } = require("../helper/function");
 const { attachGlobalEventListeners, getDeviceParams, sendFn } = require("../lib/browser");
 const useLogstyx = require("logstyx-js-core")
 
@@ -7,13 +9,21 @@ let instance;
 
 if (typeof window !== "undefined") {
     if (window.LogstyxConfig && !window.Logstyx) {
+
         instance = useLogstyx({
             ...window.LogstyxConfig,
             sendFunc: sendFn,
             device: window.LogstyxConfig.device || defaultDevice,
         });
+
+        if (window?.LogstyxConfig?.persistentSession === true) {
+            const sessionId = getOrSetSessionId()
+            instance.setContext({ sessionId })
+        }
+
         window.Logstyx = instance;
         attachGlobalEventListeners(instance);
+
         if (window?.LogstyxConfig?.captureUncaught === true) {
             try {
                 if (typeof window !== "undefined") {
@@ -30,6 +40,7 @@ if (typeof window !== "undefined") {
             }
         }
 
+
         if (window?.LogstyxConfig?.captureUnhandledRejections === true) {
             try {
                 const handler = (reason) => {
@@ -45,6 +56,8 @@ if (typeof window !== "undefined") {
                 console.error(e)
             }
         }
+
+
     } else if (window.Logstyx) {
         instance = window.Logstyx;
     }

@@ -108,8 +108,8 @@ exports.attachGlobalEventListeners = (instance) => {
             const payload = target?.dataset?.logstyxPayload
                 ? safeParse(target.dataset.logstyxPayload)
                 : buildFallbackPayload(e.target);
-
-            instance[level]?.({ ...context, ...payload });
+            instance.setContext(context)
+            instance[level]?.(payload);
         });
     });
 

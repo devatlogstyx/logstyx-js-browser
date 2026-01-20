@@ -54,7 +54,7 @@ window.LogstyxConfig = {
   // Automatic error capture
   captureUncaught: true,                // Capture uncaught exceptions
   captureUnhandledRejections: true,     // Capture unhandled promise rejections
-  
+  persistentSession:true, // automatically add sessionId on context that persist over the visiting session
   // Event tracking configuration
   tracker: {
     events: ['click', 'submit'],        // DOM events to track
@@ -73,6 +73,7 @@ window.LogstyxConfig = {
 | `endpoint` | string | Your self-hosted Logstyx API endpoint (required) |
 | `captureUncaught` | boolean | Automatically capture uncaught JavaScript exceptions |
 | `captureUnhandledRejections` | boolean | Automatically capture unhandled Promise rejections |
+| `persistentSession` | boolean | automatically add sessionId on context that persist over the visiting session |
 | `tracker.events` | array | DOM events to automatically track (e.g., 'click', 'submit', 'change') |
 | `tracker.context` | array | Context fields to include: 'event', 'url', 'referrer', 'pageTitle' |
 | `tracker.data` | array | Element attributes to capture: 'tag', 'id', 'class', 'text' |
