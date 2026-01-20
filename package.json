@@ -1,6 +1,6 @@
 {
   "name": "logstyx-js-browser",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "logstyx sdk for javascript",
   "main": "./dist/logstyx-js-browser.js",
   "scripts": {
