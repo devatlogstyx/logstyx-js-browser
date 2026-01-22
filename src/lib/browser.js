@@ -110,6 +110,7 @@ exports.attachGlobalEventListeners = (instance) => {
                 : buildFallbackPayload(e.target);
             instance.setContext(context)
             instance[level]?.(payload);
+            instance.clearContext()
         });
     });
 
